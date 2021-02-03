@@ -5,7 +5,6 @@ Make unit testing in PHP simpler again. 👌
 ## Table of Contents
 
 - [Puny](#puny)
-  - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
     - [Writing your first test](#writing-your-first-test)
