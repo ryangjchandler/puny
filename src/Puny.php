@@ -48,20 +48,15 @@ final class Puny
                 $callback();
 
                 Console::info("\xE2\x9C\x94 {$name}");
-            } catch (\Throwable $e) {
-                if ($e instanceof SkippedException) {
-                    Console::warning("\xE2\x9A\xA0 {$name}");
-                    $this->skipped++;
-                    continue;
-                }
-
-                if (! $e instanceof NotOkException) {
-                    throw $e;
-                }
-
+            } catch (SkippedException $e) {
+                Console::warning("\xE2\x9A\xA0 {$name}");
+                
+                $this->skipped++;
+                continue;
+            } catch (NotOkException $e) {
                 Console::error("\xF0\x90\x84\x82 {$name} > {$e->getMessage()}");
 
-                $this->failed++;
+                $this->failed++;            
             }
         }
 
