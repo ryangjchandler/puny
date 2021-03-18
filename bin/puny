@@ -16,16 +16,19 @@ define('PUNY_VERSION', '0.3.0');
         require_once $localPath;
     }
 
+    $puny = Puny::instance();
+
     if (count($argv) >= 2) {
         [, $folder] = $argv;
+
+        $puny->setRoot($folder);
+
+        if (in_array('--filter', $argv)) {
+            $puny->filterBy($argv[array_search('--filter', $argv) + 1]);
+        }
     } else {
-        $folder = getcwd().'/tests';
+        $puny->setRoot(getcwd() . '/tests');
     }
 
-    if (! is_dir($folder)) {
-        Console::error("Could not find the specified folder, {$folder}.");
-    }
-
-    Puny::instance()
-        ->run($folder);
+    $puny->run();
 })();
